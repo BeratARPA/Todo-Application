@@ -1,0 +1,35 @@
+﻿@model List<Todo>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-5">Todo List</h1>
+
+<a class="btn btn-primary mb-2" asp-action="Add">Add New Todo</a>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+    @foreach (var todo in Model)
+    {
+        <div class="col">
+            <div class="card mb-4 shadow-lg @(todo.IsCompleted?"border-success":"border-warning")">
+
+                <div class="card-header d-flex">
+                    <h5 class="me-auto align-center">@todo.Title</h5>
+
+                    <div class="btn-group" role="group">
+                        <a asp-action="Update" asp-route-id="@todo.Id" class="btn btn-outline-secondary">Update</a>
+                        <a asp-action="Delete" asp-route-id="@todo.Id" class="btn btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h5 class="card-title">@todo.Subtitle</h5>
+                    <p class="card-text">@todo.Description</p>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
